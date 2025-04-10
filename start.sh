@@ -7,7 +7,16 @@ echo "[INFO] Running setup..."
 git pull
 git submodule update --init --recursive
 
-cd ./coqui
+# Check for CUDA compiler (nvcc) to determine if CUDA is available
+if command -v nvcc &> /dev/null; then
+    echo "✅ CUDA detected..."
+    COQUI_PATH="./coqui-gpu"
+else
+    echo "⚠️ CUDA not detected..."
+    COQUI_PATH="./coqui"
+fi
+
+cd "$COQUI_PATH"
 ./setup.sh &  # Background job
 cd ../
 cd ./whisper
@@ -18,7 +27,7 @@ wait
 echo "[INFO] Finished setup..."
 
 echo "[INFO] Starting Coqui TTS server..."
-cd ./coqui
+cd "$COQUI_PATH"
 ./start.sh &  # Background job
 cd ../
 

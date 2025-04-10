@@ -4,3 +4,6 @@
 [submodule "whisper"]
 	path = whisper
 	url = https://github.com/beckukoppe/whisper.git
+[submodule "coqui-gpu"]
+	path = coqui-gpu
+	url = https://github.com/beckukoppe/coqui-gpu.git
