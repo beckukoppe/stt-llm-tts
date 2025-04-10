@@ -1,0 +1,6 @@
+[submodule "coqui"]
+	path = coqui
+	url = https://github.com/beckukoppe/coqui.git
+[submodule "whisper"]
+	path = whisper
+	url = https://github.com/beckukoppe/whisper.git
