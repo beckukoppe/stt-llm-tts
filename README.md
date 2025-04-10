@@ -1,6 +1,6 @@
 ## Get started
 ```bash
-git clone --recursive https://github.com/your-username/your-repo.git
+git clone --recursive https://github.com/beckukoppe/stt-llm-tts.git
 ```
 
 ```bash
