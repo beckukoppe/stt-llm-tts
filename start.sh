@@ -6,6 +6,7 @@ set -m  # Enable job control
 echo "[INFO] Running setup..."
 git pull
 git submodule update --init --recursive
+git submodule foreach 'git checkout main && git pull origin main'
 
 # Check for CUDA compiler (nvcc) to determine if CUDA is available
 if command -v nvcc &> /dev/null; then
