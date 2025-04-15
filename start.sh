@@ -4,6 +4,7 @@ set -e  # Exit on error
 set -m  # Enable job control
 
 docker ps --filter "ancestor=coqui-tts" -q | xargs -r docker kill
+docker ps --filter "ancestor=coqui-tts-gpu" -q | xargs -r docker kill
 
 echo "[INFO] Running setup..."
 git pull
