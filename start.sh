@@ -10,6 +10,7 @@ git pull
 git submodule update --init --recursive
 git submodule foreach git fetch
 git submodule foreach 'git pull origin $(git rev-parse --abbrev-ref HEAD)'
+git submodule foreach 'git checkout main && git pull origin main'
 
 # Check for CUDA compiler (nvcc) to determine if CUDA is available
 if command -v nvcc &> /dev/null; then
