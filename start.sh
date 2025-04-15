@@ -3,9 +3,13 @@
 set -e  # Exit on error
 set -m  # Enable job control
 
+docker ps --filter "ancestor=coqui-tts" -q | xargs -r docker kill
+
 echo "[INFO] Running setup..."
 git pull
 git submodule update --init --recursive
+git submodule foreach git fetch
+git submodule foreach 'git pull origin $(git rev-parse --abbrev-ref HEAD)'
 
 # Check for CUDA compiler (nvcc) to determine if CUDA is available
 if command -v nvcc &> /dev/null; then
@@ -31,12 +35,21 @@ cd "$COQUI_PATH"
 ./start.sh &  # Background job
 cd ../
 
-# Example: start another background process (e.g., dummy log monitor)
-echo "[INFO] Starting auxiliary process..."
-#python3 monitor_logs.py &  # Replace with real command/script
+if [ ! -d "venv" ]; then
+  echo "Creating virtual environment..."
+  python -m venv venv
+fi
 
-# Wait for all background jobs to complete
+if [ -z "$VIRTUAL_ENV" ]; then
+  echo "Activating virtual environment..."
+  source venv/bin/activate
+  pip install -r requirements.txt
+fi
+
+clear
+
+echo "[INFO] Starting main application"
+python ./source/main.py
+
 wait
 
-docker stop coqui-tts
-echo "[INFO] All processes finished."
