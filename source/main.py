@@ -125,7 +125,7 @@ def run_pipeline():
             tts(clean_reply)
             
         except Exception as e:
-            print(f"Error: {e}")
+            print(f"LLM-Server-Error: {e}")
         finally:
             is_processing = False
 
