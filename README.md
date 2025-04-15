@@ -1,4 +1,8 @@
-# Get started
+## Requirements
+- Docker (and user in docker group)
+- python and pip
+
+## Get started
 
 ### Clone the repository (recursively)
 ```bash
